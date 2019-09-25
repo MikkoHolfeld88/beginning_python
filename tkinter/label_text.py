@@ -12,5 +12,3 @@ tk.Label(mainWindow,
          font = "Helvetica 24 bold").pack()
 
 mainWindow.mainloop()
-
-
