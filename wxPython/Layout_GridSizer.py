@@ -1,20 +1,19 @@
 import wx
 
-
-class Example(wx.Frame):
+class GUI_mt(wx.Frame):
 
     def __init__(self, parent, title):
-        super(Example, self).__init__(parent, title=title)
+        super().__init__(parent, title=title)
 
         self.InitUI()
-        self.SetSize(400,400)
+        self.SetSize(640,480)
         self.Centre()
 
     def InitUI(self):
 
         menubar = wx.MenuBar()
-        fileMenu = wx.Menu()
-        menubar.Append(fileMenu, '&Datei')
+        dateiMenü = wx.Menu()
+        menubar.Append(dateiMenü, '&Datei')
         self.SetMenuBar(menubar)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
@@ -22,7 +21,8 @@ class Example(wx.Frame):
         vbox.Add(self.display, flag=wx.EXPAND|wx.TOP|wx.BOTTOM, border=6)
         gs = wx.GridSizer(5, 4, 5, 5)   # Grid(Rows, Columns, Border Rows, Border Columns)
 
-        gs.AddMany( [(wx.Button(self, label='Clear'), 0, wx.EXPAND),    #1st Row 1
+        gs.AddMany([
+            (wx.Button(self, label='Clear'), 0, wx.EXPAND),    #1st Row 1
             (wx.Button(self, label='Zurück'), 0, wx.EXPAND),            #1st Row 2
             (wx.StaticText(self), wx.EXPAND),                           #1st Row 3
             (wx.Button(self, label='Ende'), 0, wx.EXPAND),              #1st Row 4
@@ -41,16 +41,16 @@ class Example(wx.Frame):
             (wx.Button(self, label='0'), 0, wx.EXPAND),                 #5th Row
             (wx.Button(self, label='.'), 0, wx.EXPAND),
             (wx.Button(self, label='='), 0, wx.EXPAND),
-            (wx.Button(self, label='+'), 0, wx.EXPAND) ])
+            (wx.Button(self, label='+'), 0, wx.EXPAND)
+        ])
 
         vbox.Add(gs, proportion=1, flag=wx.EXPAND)
         self.SetSizer(vbox)
 
-
 def main():
 
     app = wx.App()
-    ex = Example(None, title='Taschenrechner')
+    ex = GUI_mt(None, title='Morning_Thoughts')
     ex.Show()
     app.MainLoop()
 

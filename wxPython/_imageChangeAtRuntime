@@ -1,0 +1,31 @@
+import wx
+class MainWindow(wx.Frame):
+    def __init__(self,parent,title):
+        self.imgList = ['icon/new.png','icon/open.png','icon/save.png']
+        self.imgInd = 0
+
+        wx.Frame.__init__(self,parent,wx.ID_ANY,title,style=wx.DEFAULT_FRAME_STYLE|wx.NO_FULL_REPAINT_ON_RESIZE)
+        self.sizer1 = wx.BoxSizer(wx.VERTICAL)
+
+        jpg = wx.Image(self.imgList[self.imgInd],wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+        self.objBmp = wx.StaticBitmap(self,wx.ID_ANY,jpg,size=(128,128),style=wx.SUNKEN_BORDER)
+        self.sizer1.Add(self.objBmp)
+        button = wx.Button(self,wx.ID_ANY,'change image')
+        self.sizer1.Add(button)
+        button.Bind(wx.EVT_BUTTON,self.OnButton)
+        self.SetSizer(self.sizer1)
+        self.Fit()
+        self.Show(1)
+
+    def OnButton(self, event):
+        self.imgInd += 1
+        if self.imgInd >= len(self.imgList):
+            self.imgInd = 0
+        jpg = wx.Image(self.imgList[self.imgInd],wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+        self.objBmp.Destroy()
+        self.objBmp = wx.StaticBitmap(self,wx.ID_ANY,jpg,size=(128,128),style=wx.SUNKEN_BORDER)
+
+app = wx.PySimpleApp()
+frame=MainWindow(None,'bmp sample')
+app.MainLoop()
+del app
